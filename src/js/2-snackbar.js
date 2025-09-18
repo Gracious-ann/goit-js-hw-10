@@ -11,28 +11,29 @@ const fooSubmit = function (event) {
   const btn = event.target.elements.state.value;
   console.log(btn);
 
-  setTimeout(() => {
-    new Promise((resolve, reject) => {
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
       if (btn === 'fulfilled') {
-        resolve({
-          title: '!',
-          message: `✅ Fulfilled promise in ${delay}ms`,
-          color: 'green',
-        });
+        resolve(delay);
+      } else {
+        reject(delay);
       }
-      reject({
-        title: '!',
+    }, Number(delay));
+  })
+    .then(delay => {
+      iziToast.show({
+        title: '✔',
+        message: `✅ Fulfilled promise in ${delay}ms`,
+        color: 'green',
+      });
+    })
+    .catch(delay => {
+      iziToast.show({
+        title: '✘',
         message: `❌ Rejected promise in ${delay}ms`,
         color: 'red',
       });
-    })
-      .then(res => {
-        iziToast.show(res);
-      })
-      .catch(err => {
-        iziToast.show(err);
-      });
-  }, Number(delay));
+    });
 };
 
 formSubmit.addEventListener('submit', fooSubmit);
