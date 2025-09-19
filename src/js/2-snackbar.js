@@ -3,13 +3,12 @@ import iziToast from 'izitoast';
 // Додатковий імпорт стилів
 import 'izitoast/dist/css/iziToast.min.css';
 
-const formSubmit = document.querySelector('form');
+const formSubmit = document.querySelector('.form');
 
 const fooSubmit = function (event) {
   event.preventDefault();
   const delay = event.target.elements.delay.value;
   const btn = event.target.elements.state.value;
-  console.log(btn);
 
   new Promise((resolve, reject) => {
     setTimeout(() => {
